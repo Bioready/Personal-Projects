@@ -1,3 +1,12 @@
+Title:,'PHIL-ASR920-CE2 - Traffic - Gi0/0/4 30 Clarion Inn 30 Metro 1836..EC CMID:11',
+Vertical Label:,'bits per second',
+Start Date:,5/4/2020 11:00,
+End Date:,5/4/2020 11:00,
+Step:,7200,
+Total Rows:,373,
+Graph ID:,20819,
+Host ID:,653,
+,,
 Date,Inbound,Outbound
 5/5/2020,695264.23,3017280.28
 5/5/2020,644061.66,5330230.75
