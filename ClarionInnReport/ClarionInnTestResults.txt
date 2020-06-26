@@ -1,0 +1,4 @@
+Week 1 -  42.68 Mbps
+Week 2 -  28.94 Mbps
+Week 3 -  28.01 Mbps
+Week 4 -  36.64 Mbps
