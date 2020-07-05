@@ -13,28 +13,64 @@ Redfin70802 = 'https://www.redfin.com/zipcode/70802/filter/sort=lo-days,property
 Redfin70806 = 'https://www.redfin.com/zipcode/70806/filter/sort=lo-days,property-type=house,min-price=250k,max-price=450k,min-beds=3,min-baths=2,status=active'
 Redfin70808 = 'https://www.redfin.com/zipcode/70808/filter/sort=lo-days,property-type=house,min-price=250k,max-price=450k,min-beds=3,min-baths=2,status=active'
 
-response70802 = get(Redfin70802, headers=headers)
-response70806 = get(Redfin70806, headers=headers)
-response70808 = get(Redfin70808, headers=headers)
+addresses = []
+prices = []
+squarefootages = []
+bedrooms = []
+bathrooms = []
+links = []
 
-html_soup70802 = BeautifulSoup(response70802.text, 'html.parser')
-html_soup70806 = BeautifulSoup(response70806.text, 'html.parser')
-html_soup70808 = BeautifulSoup(response70808.text, 'html.parser')
-
-
-house_containers_70802 = html_soup70802.find_all('div', class_='HomeCardContainer selectedHomeCard')
-house_containers_70806 = html_soup70806.find_all('div', class_='HomeCardContainer selectedHomeCard')
-house_containers_70808 = html_soup70808.find_all('div', class_='HomeCardContainer selectedHomeCard')
+n_pages = 0
 
 
-FirstHouse70802 = house_containers_70802[0]
-FirstHouse70806 = house_containers_70806[0]
-FirstHouse70808 = house_containers_70808[0]
+def ScrapeInfo(*args,):
+    for page in range(0, 75):
+        global n_pages
+        n_pages += 1
+        response = get(*args, headers=headers)
+        page_html = BeautifulSoup(response.text, 'html.parser')
+        house_containers = page_html.find_all('div', class_='HomeCardContainer selectedHomeCard')
+        if house_containers != []:
+            for container in house_containers:
 
-Price70802 = FirstHouse70802.find_all('span')[0].text
-Price70806 = FirstHouse70806.find_all('span')[0].text
-Price70808 = FirstHouse70808.find_all('span')[0].text
+                # Address
+                address = container.find_all('div', class_='addressDisplay font-size-smaller')
 
-Prices = [Price70802, Price70806, Price70808]
+                # Price
+                price = container.find_all('span')[0].text
 
-print(Prices)
+                # Square Footage
+                sqft = container.find_all('div', class_='stats')[2].text
+
+                # Bedrooms
+                bedrooms = container.find_all('div', class_='stats')[0]
+
+                # Bathrooms
+                baths = container.find_all('div', class_='stats')[1]
+
+                # URL
+#                link = 'https://www.redfin.com/' + container.find_all('a').get('href')[1:-6]
+#                urls.append(link)
+        else:
+            break
+    print('You scraped {} pages containing {} properties.'.format(n_pages, len(addresses)))
+
+
+#    sleep(randint(1,2))
+
+
+ScrapeInfo(Redfin70802)
+ScrapeInfo(Redfin70806)
+ScrapeInfo(Redfin70808)
+
+
+# cols = ['Address', 'Price', 'SqFt', 'Bedrooms', 'Bathrooms', 'URL']
+
+# BatonRouge70802 = pd.DataFrame({'Address': addresses,
+#                                'Price': prices,
+#                                'SqFt': squarefootages,
+#                                'Bedrooms': bedrooms,
+#                                'Bathrooms': bathrooms,
+#                                'URL': links})[cols]
+
+# BatonRouge70802.to_excel('lisboa_raw.xls')
