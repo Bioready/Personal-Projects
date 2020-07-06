@@ -13,8 +13,8 @@ usernamebox = browser.find_elements_by_xpath('//*[@id="user_row"]/td[2]/input')[
 passwordbox = browser.find_elements_by_xpath('//*[@id="password_row"]/td[2]/input')[0]
 
 # Input username and password
-usernamebox.send_keys('ljd2371')
-passwordbox.send_keys('B4mb00zle!25')
+usernamebox.send_keys('USERNAME')
+passwordbox.send_keys('PASSWORD')
 
 # Click Login
 LoginButton = browser.find_elements_by_xpath('//*[@id="login"]/tbody/tr[9]/td/input')[0]
