@@ -16,7 +16,7 @@ wait = browser.implicitly_wait(5)
 
 # Input username
 usernamebox = browser.find_element_by_xpath('//*[@id="username"]')
-usernamebox.send_keys('ljd2371@eatel.com')
+usernamebox.send_keys('USERNAME')
 shortwait
 
 # Click Next
@@ -28,7 +28,7 @@ wait
 
 # Enter Password
 passwordbox = browser.find_elements_by_xpath('//*[@id="i0118"]')[0]
-passwordbox.send_keys('B4mb00zle!25')
+passwordbox.send_keys('PASSWORD')
 shortwait
 
 # Click Sign In
